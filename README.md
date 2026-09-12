@@ -13,7 +13,7 @@ The current version contains four main parts of the experimental work:
 3. A privacy-matched recurrence baseline (`FS-ETHE`) implemented in `code/privacy_matched_baseline.py`. For the declared circuit, the baseline requires 2,312 graph ciphertext products on the Karate graph and 115,008 on the larger Digits graph. KGC has no graph-dependent ciphertext products after upload.
 4. An optional TenSEAL CKKS runner. Actual CKKS results are written only when the TenSEAL implementation is really executed. The repository keeps these results separate from the calibrated estimates.
 
-The regression suite contains 14 tests.
+The regression suite contains 18 tests.
 
 ## Numerical results and how they were obtained
 
@@ -29,6 +29,7 @@ In particular, the CKKS estimates included in the repository are not hardware me
 
 ## Reproducing the experiments
 
+The submission environment was tested with Python 3.13.0. Exact dependency versions are recorded in `requirements-lock.txt`.
 Create a virtual environment and install the standard dependencies:
 
 ```bash
