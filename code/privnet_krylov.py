@@ -102,6 +102,13 @@ def chebyshev_krylov_compile(s: np.ndarray, x: np.ndarray, degree: int) -> List[
     """
     if degree < 0:
         raise ValueError("degree must be nonnegative")
+    if s.ndim != 2 or s.shape[0] != s.shape[1]:
+        raise ValueError("s must be a square 2D matrix")
+    if x.ndim != 2:
+        raise ValueError("x must be a 2D matrix")
+    if s.shape[0] != x.shape[0]:
+        raise ValueError("s and x must have the same number of rows")
+
     blocks = [x.copy()]
     if degree == 0:
         return blocks
