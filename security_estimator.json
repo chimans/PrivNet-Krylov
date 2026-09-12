@@ -1,0 +1,16 @@
+{
+  "tool": "lattice-estimator",
+  "commit": "53da5982597709ba0fdf94ea37a84d822310fd84",
+  "method": "LWE.estimate.rough",
+  "parameters": {
+    "n": 16384,
+    "q_model": "2^400",
+    "secret_distribution": "UniformMod(3)",
+    "error_distribution": "DiscreteGaussian(stddev=3.19)"
+  },
+  "results": {
+    "usvp_rop_log2": 107.2,
+    "dual_hybrid_rop_log2": 107.2
+  },
+  "note": "Rough lattice-estimator result; not a claim of 128-bit security."
+}

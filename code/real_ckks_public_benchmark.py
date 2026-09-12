@@ -165,6 +165,32 @@ def encrypted_poly(columns: Sequence, coeff: Sequence[float]) -> List:
     return [x.polyval(coeff) for x in columns]
 
 
+
+def encrypted_folded_poly_head(
+    preactivation: Sequence,
+    coeff: Sequence[float],
+    weight: np.ndarray,
+    bias: np.ndarray,
+) -> List:
+    """Evaluate polynomial activation and linear head without an extra CKKS level."""
+    coeff = np.asarray(coeff, dtype=np.float64)
+    weight = np.asarray(weight, dtype=np.float64)
+    bias = np.asarray(bias, dtype=np.float64)
+
+    hdim, classes = weight.shape
+    if len(preactivation) != hdim:
+        raise ValueError("hidden dimension mismatch")
+
+    out: List = []
+    for c in range(classes):
+        acc = None
+        for h in range(hdim):
+            term = preactivation[h].polyval((coeff * weight[h, c]).tolist())
+            acc = term if acc is None else acc + term
+        out.append(acc + float(bias[c]))
+    return out
+
+
 def encrypted_head(hidden: Sequence, weight: np.ndarray, bias: np.ndarray) -> List:
     weight = np.asarray(weight, dtype=np.float64)
     bias = np.asarray(bias, dtype=np.float64)
@@ -237,8 +263,12 @@ def _run_skhe(context, a: Dict[str, np.ndarray], degree: int):
         t1 = _now_ms()
         bank = encrypted_chebyshev_bank(enc_x, a["shift"], degree)
         u = encrypted_affine(bank, a["theta"], a["hidden_bias"])
-        h = encrypted_poly(u, a["activation_coeff"])
-        z = encrypted_head(h, a["out_weight"], a["out_bias"])
+        z = encrypted_folded_poly_head(
+            u,
+            a["activation_coeff"],
+            a["out_weight"],
+            a["out_bias"],
+        )
         server_ms = _now_ms() - t1
 
         t2 = _now_ms()

@@ -2,12 +2,12 @@
   "evidence_status": "MEASURED_REAL_CKKS",
   "benchmark": "PrivNet-Krylov matched TenSEAL CKKS relocation benchmark",
   "dataset": {
-    "name": "Zachary Karate Club",
+    "name": "karate_seed7",
     "nodes": 34,
     "edges": 78,
     "feature_dim": 34
   },
-  "artifact": "/Users/aldo_valletti/PrivNet-Krylov/outputs/public_graph/karate_seed7_ckks_artifact.npz",
+  "artifact": "/Users/aldo_valletti/Desktop/PrivNet-Krylov/outputs/public_graph/karate_seed7_ckks_artifact.npz",
   "hardware": {
     "platform": "macOS-14.6-arm64-arm-64bit-Mach-O",
     "machine": "arm64",
@@ -22,11 +22,9 @@
     "mkl_num_threads": null
   },
   "ckks_parameters": {
-    "poly_modulus_degree": 32768,
+    "poly_modulus_degree": 16384,
     "coeff_mod_bit_sizes": [
       60,
-      40,
-      40,
       40,
       40,
       40,
@@ -38,21 +36,37 @@
     ],
     "global_scale_bits": 40
   },
-  "context_and_key_setup_ms": 4015.711208343506,
-  "client_plaintext_compile_ms": 3.504667282104492,
-  "repeats": 1,
-  "warmup": 0,
+  "security_estimator": {
+    "tool": "lattice-estimator",
+    "commit": "53da5982597709ba0fdf94ea37a84d822310fd84",
+    "method": "LWE.estimate.rough",
+    "parameters": {
+      "n": 16384,
+      "q_model": "2^400",
+      "secret_distribution": "UniformMod(3)",
+      "error_distribution": "DiscreteGaussian(stddev=3.19)"
+    },
+    "results": {
+      "usvp_rop_log2": 107.2,
+      "dual_hybrid_rop_log2": 107.2
+    },
+    "note": "Rough lattice-estimator result; not a claim of 128-bit security."
+  },
+  "context_and_key_setup_ms": 1080.058874130249,
+  "client_plaintext_compile_ms": 0.044834136962890625,
+  "repeats": 5,
+  "warmup": 1,
   "paths": {
     "KGC": {
-      "encrypt_ms_median": 2108.300832748413,
-      "server_ms_median": 9690.614208221436,
-      "decrypt_ms_median": 27.911375045776367,
-      "upload_bytes_median": 416831434,
-      "output_bytes_median": 4215160,
-      "rss_delta_bytes_median": 0,
+      "encrypt_ms_median": 796.178750038147,
+      "server_ms_median": 3384.909875869751,
+      "decrypt_ms_median": 2.5792503356933594,
+      "upload_bytes_median": 168026381,
+      "output_bytes_median": 1315771,
+      "rss_delta_bytes_median": 13352960,
       "quality": {
-        "max_abs_logit_error": 2.062405732550232e-05,
-        "mean_abs_logit_error": 7.587199841720913e-06,
+        "max_abs_logit_error": 1.6195971049626223e-05,
+        "mean_abs_logit_error": 5.913021988127471e-06,
         "test_accuracy": 0.9,
         "prediction_agreement_with_plaintext": 1.0
       },
@@ -60,15 +74,15 @@
       "graph_he_matvec_calls": 0
     },
     "SK-HE": {
-      "encrypt_ms_median": 697.2711238861084,
-      "server_ms_median": 56055.13904094696,
-      "decrypt_ms_median": 9.637290954589844,
-      "upload_bytes_median": 138939920,
-      "output_bytes_median": 1839464,
-      "rss_delta_bytes_median": 414679040,
+      "encrypt_ms_median": 258.79129123687744,
+      "server_ms_median": 18155.217707633972,
+      "decrypt_ms_median": 0.9065837860107422,
+      "upload_bytes_median": 56009553,
+      "output_bytes_median": 524582,
+      "rss_delta_bytes_median": 3391488,
       "quality": {
-        "max_abs_logit_error": 4.1160640935400394e-05,
-        "mean_abs_logit_error": 1.5480303392256587e-05,
+        "max_abs_logit_error": 2.016447544739286e-05,
+        "mean_abs_logit_error": 8.064892787377858e-06,
         "test_accuracy": 0.9,
         "prediction_agreement_with_plaintext": 1.0
       },
@@ -77,9 +91,9 @@
     }
   },
   "comparison": {
-    "server_speedup": 5.784477416652316,
-    "topology_relocation_gain": 0.8271235363247842,
-    "upload_ratio_kgc_to_skhe": 3.000084021928327,
+    "server_speedup": 5.363574917328928,
+    "topology_relocation_gain": 0.8135571861280159,
+    "upload_ratio_kgc_to_skhe": 2.999959328366716,
     "amortized_break_even_queries": 1,
     "cyclic_diagonal_count": 34
   },
