@@ -51,8 +51,8 @@ class CKKSParameters:
     set with the security guidance of the installed SEAL/TenSEAL release.
     """
 
-    poly_modulus_degree: int = 32768
-    coeff_mod_bit_sizes: tuple[int, ...] = (60, 40, 40, 40, 40, 40, 40, 40, 40, 40, 60)
+    poly_modulus_degree: int = 16384
+    coeff_mod_bit_sizes: tuple[int, ...] = (60, 40, 40, 40, 40, 40, 40, 40, 60)
     global_scale_bits: int = 40
 
 
