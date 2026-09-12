@@ -20,6 +20,7 @@ import os
 import platform
 import statistics
 import sys
+import threading
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -82,6 +83,41 @@ def _peak_delta(before: int | None, after: int | None) -> int | None:
     if before is None or after is None:
         return None
     return max(0, int(after - before))
+
+
+class _PeakRSSMonitor:
+    def __init__(self, interval: float = 0.005):
+        self.interval = interval
+        self.baseline = _rss_bytes()
+        self.peak = self.baseline
+        self._stop = threading.Event()
+        self._thread = None
+
+    def _sample(self) -> None:
+        while not self._stop.wait(self.interval):
+            rss = _rss_bytes()
+            if rss is not None and (self.peak is None or rss > self.peak):
+                self.peak = rss
+
+    def __enter__(self):
+        if self.baseline is not None:
+            self._thread = threading.Thread(target=self._sample, daemon=True)
+            self._thread.start()
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        self._stop.set()
+        if self._thread is not None:
+            self._thread.join()
+        rss = _rss_bytes()
+        if rss is not None and (self.peak is None or rss > self.peak):
+            self.peak = rss
+
+    @property
+    def delta_bytes(self) -> int | None:
+        if self.baseline is None or self.peak is None:
+            return None
+        return max(0, int(self.peak - self.baseline))
 
 
 def create_context(params: CKKSParameters):
@@ -162,77 +198,62 @@ def encrypted_chebyshev_bank(enc_x: Sequence, shift: np.ndarray, degree: int) ->
 
 
 def _run_kgc(context, a: Dict[str, np.ndarray]):
-    rss0 = _rss_bytes()
-    t0 = _now_ms()
-    enc_bank = encrypt_block_bank(context, a["blocks"])
-    enc_ms = _now_ms() - t0
-    rss1 = _rss_bytes()
-    upload_bytes = _serialize_bytes(_flatten(enc_bank))
+    with _PeakRSSMonitor() as rss_monitor:
+        t0 = _now_ms()
+        enc_bank = encrypt_block_bank(context, a["blocks"])
+        enc_ms = _now_ms() - t0
 
-    t1 = _now_ms()
-    u = encrypted_affine(enc_bank, a["theta"], a["hidden_bias"])
-    h = encrypted_poly(u, a["activation_coeff"])
-    z = encrypted_head(h, a["out_weight"], a["out_bias"])
-    server_ms = _now_ms() - t1
-    rss2 = _rss_bytes()
+        upload_bytes = _serialize_bytes(_flatten(enc_bank))
 
-    t2 = _now_ms()
-    logits = decrypt_logits(z, int(a["features"].shape[0]))
-    dec_ms = _now_ms() - t2
-    rss3 = _rss_bytes()
+        t1 = _now_ms()
+        u = encrypted_affine(enc_bank, a["theta"], a["hidden_bias"])
+        h = encrypted_poly(u, a["activation_coeff"])
+        z = encrypted_head(h, a["out_weight"], a["out_bias"])
+        server_ms = _now_ms() - t1
+
+        t2 = _now_ms()
+        logits = decrypt_logits(z, int(a["features"].shape[0]))
+        dec_ms = _now_ms() - t2
+
     return {
         "encrypt_ms": enc_ms,
         "server_ms": server_ms,
         "decrypt_ms": dec_ms,
         "upload_bytes": upload_bytes,
         "output_bytes": _serialize_bytes(z),
-        "rss_delta_bytes": max(
-            x for x in (
-                _peak_delta(rss0, rss1),
-                _peak_delta(rss0, rss2),
-                _peak_delta(rss0, rss3),
-            ) if x is not None
-        ) if rss0 is not None else None,
+        "rss_delta_bytes": rss_monitor.delta_bytes,
         "logits": logits,
     }
 
 
 def _run_skhe(context, a: Dict[str, np.ndarray], degree: int):
-    rss0 = _rss_bytes()
-    t0 = _now_ms()
-    enc_x = encrypt_columns(context, a["features"])
-    enc_ms = _now_ms() - t0
-    rss1 = _rss_bytes()
-    upload_bytes = _serialize_bytes(enc_x)
+    with _PeakRSSMonitor() as rss_monitor:
+        t0 = _now_ms()
+        enc_x = encrypt_columns(context, a["features"])
+        enc_ms = _now_ms() - t0
 
-    t1 = _now_ms()
-    bank = encrypted_chebyshev_bank(enc_x, a["shift"], degree)
-    u = encrypted_affine(bank, a["theta"], a["hidden_bias"])
-    h = encrypted_poly(u, a["activation_coeff"])
-    z = encrypted_head(h, a["out_weight"], a["out_bias"])
-    server_ms = _now_ms() - t1
-    rss2 = _rss_bytes()
+        upload_bytes = _serialize_bytes(enc_x)
 
-    t2 = _now_ms()
-    logits = decrypt_logits(z, int(a["features"].shape[0]))
-    dec_ms = _now_ms() - t2
-    rss3 = _rss_bytes()
+        t1 = _now_ms()
+        bank = encrypted_chebyshev_bank(enc_x, a["shift"], degree)
+        u = encrypted_affine(bank, a["theta"], a["hidden_bias"])
+        h = encrypted_poly(u, a["activation_coeff"])
+        z = encrypted_head(h, a["out_weight"], a["out_bias"])
+        server_ms = _now_ms() - t1
+
+        t2 = _now_ms()
+        logits = decrypt_logits(z, int(a["features"].shape[0]))
+        dec_ms = _now_ms() - t2
+
     return {
         "encrypt_ms": enc_ms,
         "server_ms": server_ms,
         "decrypt_ms": dec_ms,
         "upload_bytes": upload_bytes,
         "output_bytes": _serialize_bytes(z),
-        "rss_delta_bytes": max(
-            x for x in (
-                _peak_delta(rss0, rss1),
-                _peak_delta(rss0, rss2),
-                _peak_delta(rss0, rss3),
-            ) if x is not None
-        ) if rss0 is not None else None,
+        "rss_delta_bytes": rss_monitor.delta_bytes,
         "logits": logits,
     }
-
 
 def _metrics(logits: np.ndarray, a: Dict[str, np.ndarray]) -> Dict[str, float]:
     ref = np.asarray(a["plaintext_poly_logits"], dtype=np.float64)
