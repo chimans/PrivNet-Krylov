@@ -1,0 +1,44 @@
+{
+  "dataset": "Zachary Karate Club",
+  "dataset_source": "NetworkX karate_club_graph; Zachary (1977)",
+  "num_seeds": 20,
+  "config": {
+    "krylov_degree": 2,
+    "hidden_dim": 12,
+    "activation_degree": 5,
+    "train_per_class": 8,
+    "val_per_class": 4,
+    "epochs_relu": 1200,
+    "patience_relu": 200,
+    "epochs_poly": 500,
+    "patience_poly": 100,
+    "lr_relu": 0.03,
+    "lr_poly": 0.005,
+    "weight_decay": 0.0005,
+    "interval_padding": 1.05,
+    "interval_penalty": 0.01,
+    "poly_grid_size": 12001
+  },
+  "relu_test_accuracy_before_poly_finetune": {
+    "mean": 0.8550000011920929,
+    "sample_sd": 0.1276302145415693
+  },
+  "poly_test_accuracy_before_finetune": {
+    "mean": 0.8449999988079071,
+    "sample_sd": 0.1276302150331594
+  },
+  "poly_test_accuracy_after_finetune": {
+    "mean": 0.8499999970197678,
+    "sample_sd": 0.12773326711820546
+  },
+  "relu_test_accuracy_after_finetune": {
+    "mean": 0.8650000005960464,
+    "sample_sd": 0.13088765023313872
+  },
+  "poly_relu_prediction_agreement_all_nodes": {
+    "mean": 0.9705882251262665,
+    "sample_sd": 0.035704526028722955
+  },
+  "cyclic_diagonal_count_normalized_adjacency": 34,
+  "interpretation": "The public-graph experiment validates model behavior on observed network data. It is intentionally a small-node benchmark so that the same artifact can be used for real CKKS execution. It is not presented as a large-scale GNN benchmark."
+}

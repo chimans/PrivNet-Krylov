@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Larger public-data graph validation on the 1,797-node Digits 10-NN graph. Values are mean $\pm$ sample standard deviation across five stratified splits. The polynomial interval is calibrated from train and validation nodes only.}
+\label{tab:digits-knn}
+\begin{tabular}{lc}
+\toprule
+Quantity & Result \\
+\midrule
+Nodes / undirected edges & 1797 / 12339 \\
+Classes / compiled feature channels & 10 / 32 \\
+Train / validation / test nodes & 500 / 200 / 1097 \\
+Krylov degree / activation degree & 2 / 5 \\
+ReLU test accuracy & 97.36 $\pm$ 0.84\% \\
+Polynomial test accuracy & 97.47 $\pm$ 0.37\% \\
+Polynomial/ReLU agreement & 99.02 $\pm$ 0.52\% \\
+Test preactivations inside calibrated interval & 100.00 $\pm$ 0.00\% \\
+\bottomrule
+\end{tabular}
+\end{table}

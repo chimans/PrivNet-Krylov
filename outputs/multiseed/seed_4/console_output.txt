@@ -1,0 +1,9 @@
+PrivNet-Krylov reproducible simulator
+nodes=360, edges=2276, K=4
+plaintext ReLU accuracy: train=0.9747, val=1.0000, test=0.9815
+exact compilation max |error|=0.000e+00
+preactivation interval=[-2.4921, 2.4921]
+best certification row: degree=9, depth=4, eps_act=0.0839, test_acc_sim=0.9815, certified_test_fraction=0.6389
+expander rho=0.736420, Ramanujan envelope=0.745356
+server graph-dependent rotations: compiled=0 vs diagonal-proxy=357
+NOTE: CKKS perturbations are simulated; see tenseal_backend.py for a real-CKKS adapter.

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: PrivNet-Krylov
+
+authors:
+  - family-names: Hakimian
+    given-names: Ehsan
+
+  - family-names: Soltanian
+    given-names: Chiman
+    email: soltanian.c23@htlwienwest.at

@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{Slot-aware scale envelope under the reference $N=16384$ CKKS context ($8192$ slots), $K=2$. The $f_c=32$ columns describe a compact deployment scenario with a declared 32-channel client-visible/public input projection; they are analytical capacity estimates, not executed accuracy or latency results. SK-HE matvec bounds use the $B$-to-$B^2$ nonempty-block envelope for graphs whose every public row shard is incident to the shift.}
+\label{tab:scaling-envelope}
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrr}
+\toprule
+Dataset & Nodes & Edges & Raw $f$ & Batches $B$ & KGC cts ($f_c=32$) & KGC upload (GiB) & SK-HE graph matvec envelope \\
+\midrule
+Karate & 34 & 78 & 34 & 1 & 96 & 0.21 & 64--64 \\
+Cora & 2,708 & 5,429 & 1,433 & 1 & 96 & 0.21 & 64--64 \\
+CiteSeer & 3,327 & 4,732 & 3,703 & 1 & 96 & 0.21 & 64--64 \\
+PubMed & 19,717 & 44,338 & 500 & 3 & 288 & 0.63 & 192--576 \\
+ogbn-arxiv & 169,343 & 1,166,243 & 128 & 21 & 2,016 & 4.43 & 1,344--28,224 \\
+ogbn-products & 2,449,029 & 61,859,140 & 100 & 299 & 28,704 & 63.07 & 19,136--5,721,664 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

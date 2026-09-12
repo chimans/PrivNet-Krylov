@@ -1,0 +1,257 @@
+{
+  "configuration": {
+    "seed": 6,
+    "num_classes": 3,
+    "nodes_per_class": 120,
+    "feature_dim": 8,
+    "hidden_dim": 20,
+    "krylov_degree": 4,
+    "train_fraction": 0.55,
+    "val_fraction": 0.15,
+    "p_in": 0.085,
+    "p_out": 0.012,
+    "feature_noise": 1.2,
+    "epochs": 450,
+    "lr": 0.025,
+    "weight_decay": 0.0001,
+    "activation_degrees": [
+      2,
+      3,
+      5,
+      7,
+      9
+    ],
+    "poly_grid_size": 12001,
+    "pre_ckks_error": 0.0015,
+    "out_ckks_error": 0.0008,
+    "expander_n": 256,
+    "expander_degree": 6,
+    "expander_seed": 11
+  },
+  "dataset": {
+    "type": "synthetic stochastic block model",
+    "nodes": 360,
+    "classes": 3,
+    "features": 8,
+    "train_nodes": 198,
+    "validation_nodes": 54,
+    "test_nodes": 108
+  },
+  "plaintext_relu_accuracy": {
+    "train": 1.0,
+    "validation": 1.0,
+    "test": 0.9907407164573669
+  },
+  "exact_compilation_equivalence_max_abs_error": 0.0,
+  "activation_summary": {
+    "preactivation_bound": 5.782569208146142,
+    "output_column_l1_norm": 8.037463930435479,
+    "min_margin": 0.020068198442459106,
+    "median_margin": 12.181063890457153,
+    "mean_margin": 12.391178719782166,
+    "exact_test_accuracy_relu": 0.9907407407407407,
+    "calibration_interval_coverage_all_nodes": 0.9972222222222222,
+    "calibration_interval_coverage_test_nodes": 0.9907407407407407,
+    "calibration_policy": "train and validation preactivations only"
+  },
+  "activation_tradeoff": [
+    {
+      "degree": 2,
+      "activation_uniform_error": 0.5421610169993603,
+      "multiplicative_depth": 1,
+      "test_accuracy_polynomial": 0.9907407407407407,
+      "test_accuracy_simulated_ckks": 0.9907407407407407,
+      "prediction_agreement_with_relu": 0.9972222222222222,
+      "certified_fraction_all_nodes": 0.8222222222222222,
+      "certified_fraction_test_nodes": 0.7592592592592593,
+      "theoretical_logit_error_bound": 4.3704558145162276,
+      "measured_max_logit_error": 2.1258788990581445,
+      "all_certified_nodes_invariant": true,
+      "power_coefficients": [
+        0.5421610169993603,
+        0.5000000000000001,
+        0.08105583066050108
+      ]
+    },
+    {
+      "degree": 3,
+      "activation_uniform_error": 0.5421610169993611,
+      "multiplicative_depth": 2,
+      "test_accuracy_polynomial": 0.9907407407407407,
+      "test_accuracy_simulated_ckks": 0.9907407407407407,
+      "prediction_agreement_with_relu": 0.9972222222222222,
+      "certified_fraction_all_nodes": 0.8222222222222222,
+      "certified_fraction_test_nodes": 0.7592592592592593,
+      "theoretical_logit_error_bound": 4.370455814516235,
+      "measured_max_logit_error": 2.123141197824747,
+      "all_certified_nodes_invariant": true,
+      "power_coefficients": [
+        0.5421610169993611,
+        0.49999999999999994,
+        0.08105583066050101,
+        1.6530461973893554e-17
+      ]
+    },
+    {
+      "degree": 5,
+      "activation_uniform_error": 0.3388506144499597,
+      "multiplicative_depth": 3,
+      "test_accuracy_polynomial": 0.9907407407407407,
+      "test_accuracy_simulated_ckks": 0.9907407407407407,
+      "prediction_agreement_with_relu": 0.9972222222222222,
+      "certified_fraction_all_nodes": 0.9555555555555556,
+      "certified_fraction_test_nodes": 0.9351851851851852,
+      "theoretical_logit_error_bound": 2.7363557873431033,
+      "measured_max_logit_error": 1.1705313728637634,
+      "all_certified_nodes_invariant": true,
+      "power_coefficients": [
+        0.3388506144499597,
+        0.49999999999999917,
+        0.1418477085803247,
+        8.782941511991104e-17,
+        -0.0021206954475560488,
+        -1.725701205673965e-18
+      ]
+    },
+    {
+      "degree": 7,
+      "activation_uniform_error": 0.24707855073444085,
+      "multiplicative_depth": 3,
+      "test_accuracy_polynomial": 0.9907407407407407,
+      "test_accuracy_simulated_ckks": 0.9907407407407407,
+      "prediction_agreement_with_relu": 0.9972222222222222,
+      "certified_fraction_all_nodes": 0.9833333333333333,
+      "certified_fraction_test_nodes": 0.9722222222222222,
+      "theoretical_logit_error_bound": 1.998741135407994,
+      "measured_max_logit_error": 0.7621800396669167,
+      "all_certified_nodes_invariant": true,
+      "power_coefficients": [
+        0.24707855073444085,
+        0.4999999999999995,
+        0.1994733501938645,
+        1.2721724330782584e-16,
+        -0.007289891522181614,
+        -9.071270044467815e-18,
+        0.00011334709791838232,
+        1.6777783651849464e-19
+      ]
+    },
+    {
+      "degree": 9,
+      "activation_uniform_error": 0.19457433573660432,
+      "multiplicative_depth": 4,
+      "test_accuracy_polynomial": 0.9907407407407407,
+      "test_accuracy_simulated_ckks": 0.9907407407407407,
+      "prediction_agreement_with_relu": 0.9972222222222222,
+      "certified_fraction_all_nodes": 0.9888888888888889,
+      "certified_fraction_test_nodes": 0.9722222222222222,
+      "theoretical_logit_error_bound": 1.5767404011670534,
+      "measured_max_logit_error": 0.526306226648634,
+      "all_certified_nodes_invariant": true,
+      "power_coefficients": [
+        0.19457433573660432,
+        0.49999999999999745,
+        0.25599081620219005,
+        6.543439045149213e-16,
+        -0.016584505953557642,
+        -2.9985936656616874e-17,
+        0.0005950724145856141,
+        4.342669997490597e-21,
+        -7.716470459251248e-06,
+        1.1492761346617242e-20
+      ]
+    }
+  ],
+  "expander_summary": {
+    "n": 256,
+    "degree": 6,
+    "measured_nontrivial_spectral_radius_ratio": 0.7364200532935301,
+    "ramanujan_ratio": 0.7453559924999299,
+    "satisfies_ramanujan_eigenvalue_inequality_empirically": true
+  },
+  "expander_mixing": [
+    {
+      "K": 1,
+      "measured_relative_mean_zero_norm": 0.4075273427909016,
+      "rho_power_bound": 0.7364200532935301,
+      "ramanujan_power_bound": 0.7453559924999299
+    },
+    {
+      "K": 2,
+      "measured_relative_mean_zero_norm": 0.22047528625089322,
+      "rho_power_bound": 0.5423144948928458,
+      "ramanujan_power_bound": 0.5555555555555556
+    },
+    {
+      "K": 3,
+      "measured_relative_mean_zero_norm": 0.13140766818586638,
+      "rho_power_bound": 0.3993712692308433,
+      "ramanujan_power_bound": 0.41408666249996107
+    },
+    {
+      "K": 4,
+      "measured_relative_mean_zero_norm": 0.08220110368272204,
+      "rho_power_bound": 0.2941050113708824,
+      "ramanujan_power_bound": 0.30864197530864196
+    },
+    {
+      "K": 5,
+      "measured_relative_mean_zero_norm": 0.052893430571734165,
+      "rho_power_bound": 0.2165848281476395,
+      "ramanujan_power_bound": 0.2300481458333117
+    },
+    {
+      "K": 6,
+      "measured_relative_mean_zero_norm": 0.03467070363569303,
+      "rho_power_bound": 0.15949741068705472,
+      "ramanujan_power_bound": 0.17146776406035666
+    },
+    {
+      "K": 7,
+      "measured_relative_mean_zero_norm": 0.023030211592087436,
+      "rho_power_bound": 0.11745709167834091,
+      "ramanujan_power_bound": 0.12780452546295093
+    },
+    {
+      "K": 8,
+      "measured_relative_mean_zero_norm": 0.01545595849557803,
+      "rho_power_bound": 0.08649775771346686,
+      "ramanujan_power_bound": 0.09525986892242036
+    },
+    {
+      "K": 9,
+      "measured_relative_mean_zero_norm": 0.010460222399112934,
+      "rho_power_bound": 0.06369868334512212,
+      "ramanujan_power_bound": 0.07100251414608386
+    },
+    {
+      "K": 10,
+      "measured_relative_mean_zero_norm": 0.0071300524250853484,
+      "rho_power_bound": 0.04690898778374253,
+      "ramanujan_power_bound": 0.05292214940134465
+    },
+    {
+      "K": 11,
+      "measured_relative_mean_zero_norm": 0.004890719221627497,
+      "rho_power_bound": 0.03454471928364923,
+      "ramanujan_power_bound": 0.03944584119226881
+    },
+    {
+      "K": 12,
+      "measured_relative_mean_zero_norm": 0.0033736568828151153,
+      "rho_power_bound": 0.025439424015875,
+      "ramanujan_power_bound": 0.029401194111858136
+    }
+  ],
+  "operation_counts": {
+    "n_nodes": 360,
+    "n_edges": 2311,
+    "average_degree": 12.838888888888889,
+    "nonzero_cyclic_diagonals_of_A_plus_I": 360,
+    "diagonal_method_graph_dependent_rotations_proxy": 359,
+    "privnet_krylov_server_graph_dependent_rotations": 0,
+    "uploaded_krylov_blocks": 5,
+    "note": "Operation-count illustration only; not a wall-clock benchmark."
+  },
+  "disclaimer": "CKKS values are bounded numerical perturbation simulations, not measured cryptographic runtime/security results."
+}

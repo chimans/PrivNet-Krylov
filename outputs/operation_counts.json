@@ -1,0 +1,10 @@
+{
+  "n_nodes": 360,
+  "n_edges": 2290,
+  "average_degree": 12.722222222222221,
+  "nonzero_cyclic_diagonals_of_A_plus_I": 359,
+  "diagonal_method_graph_dependent_rotations_proxy": 358,
+  "privnet_krylov_server_graph_dependent_rotations": 0,
+  "uploaded_krylov_blocks": 5,
+  "note": "Operation-count illustration only; not a wall-clock benchmark."
+}

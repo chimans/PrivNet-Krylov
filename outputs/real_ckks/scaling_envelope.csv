@@ -1,0 +1,7 @@
+dataset,nodes,edges,raw_features,slots,node_batches,kgc_ciphertexts_raw_features,kgc_upload_gib_raw_features,deployment_latent_width,kgc_ciphertexts_f32,kgc_upload_gib_f32,skhe_input_ciphertexts_f32,skhe_graph_matvec_lower_f32,skhe_graph_matvec_upper_f32,note
+Karate,34,78,34,8192,1,102,0.22412109375,32,96,0.2109375,32,64,64,observed public baseline
+Cora,2708,5429,1433,8192,1,4299,9.446044921875,32,96,0.2109375,32,64,64,Planetoid citation graph
+CiteSeer,3327,4732,3703,8192,1,11109,24.409423828125,32,96,0.2109375,32,64,64,Planetoid citation graph
+PubMed,19717,44338,500,8192,3,4500,9.8876953125,32,288,0.6328125,96,192,576,Planetoid citation graph
+ogbn-arxiv,169343,1166243,128,8192,21,8064,17.71875,32,2016,4.4296875,672,1344,28224,OGB citation graph
+ogbn-products,2449029,61859140,100,8192,299,89700,197.0947265625,32,28704,63.0703125,9568,19136,5721664,OGB co-purchase graph

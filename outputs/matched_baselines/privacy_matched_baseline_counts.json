@@ -1,0 +1,40 @@
+{
+  "baseline": "fixed-shape encrypted-topology HE (FS-ETHE)",
+  "security_position": "FS-ETHE encrypts every cyclic diagonal in a public n-diagonal padded representation, so the evaluator does not receive plaintext topology and the program shape does not reveal sparsity. It is a matched reference circuit, not an optimized reproduction of FicGCN, DESIGN, G-HEMP, or MAPP.",
+  "artifacts": {
+    "Karate": {
+      "nodes": 34,
+      "feature_dim": 34,
+      "krylov_degree": 2,
+      "kgc_input_ciphertexts": 102,
+      "kgc_graph_ct_pt_multiplies": 0,
+      "kgc_graph_ct_ct_multiplies": 0,
+      "kgc_graph_rotations": 0,
+      "skhe_input_ciphertexts": 34,
+      "skhe_graph_ct_pt_multiplies": 2312,
+      "skhe_graph_rotations": 2244,
+      "fsethe_input_feature_ciphertexts": 34,
+      "fsethe_input_topology_ciphertexts": 34,
+      "fsethe_graph_ct_ct_multiplies": 2312,
+      "fsethe_graph_rotations": 2244,
+      "fsethe_graph_additions": 2244
+    },
+    "Digits-10NN": {
+      "nodes": 1797,
+      "feature_dim": 32,
+      "krylov_degree": 2,
+      "kgc_input_ciphertexts": 96,
+      "kgc_graph_ct_pt_multiplies": 0,
+      "kgc_graph_ct_ct_multiplies": 0,
+      "kgc_graph_rotations": 0,
+      "skhe_input_ciphertexts": 32,
+      "skhe_graph_ct_pt_multiplies": 115008,
+      "skhe_graph_rotations": 114944,
+      "fsethe_input_feature_ciphertexts": 32,
+      "fsethe_input_topology_ciphertexts": 1797,
+      "fsethe_graph_ct_ct_multiplies": 115008,
+      "fsethe_graph_rotations": 114944,
+      "fsethe_graph_additions": 114944
+    }
+  }
+}

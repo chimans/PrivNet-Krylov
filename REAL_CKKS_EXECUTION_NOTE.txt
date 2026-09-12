@@ -1,0 +1,44 @@
+REAL CKKS EXECUTION STATUS AND PROCEDURE
+========================================
+
+The repository includes a TenSEAL CKKS execution path. It only writes a measured
+result after TenSEAL has actually been run. If TenSEAL is not installed, the script
+stops instead of creating a placeholder measurement.
+
+RUNNER
+  code/real_ckks_public_benchmark.py
+
+DEFAULT ARTIFACT
+  outputs/public_graph/karate_seed7_ckks_artifact.npz
+
+OPTIONAL LARGER ARTIFACT
+  outputs/larger_public_graph/digits_knn_seed7_ckks_artifact.npz
+
+INSTALL
+  pip install -r requirements-ckks.txt
+
+RUN
+  python code/real_ckks_public_benchmark.py \
+    --artifact outputs/public_graph/karate_seed7_ckks_artifact.npz \
+    --label "Zachary Karate Club" \
+    --out outputs/real_ckks/measured \
+    --repeats 5 --warmup 1
+
+FILES WRITTEN BY A SUCCESSFUL REAL RUN
+  measured_ckks_results.json
+  measured_ckks_results.csv
+  measured_ckks_table.tex
+
+RECORDED METADATA
+  CKKS polynomial-modulus degree, coefficient-modulus chain, global scale,
+  TenSEAL version, Python/NumPy versions, CPU model/count, RAM, thread settings,
+  key/context setup, client compilation, encryption/server/decryption medians,
+  serialized ciphertext bytes, process-memory change when available, numerical
+  logit error, accuracy, prediction agreement, repetitions, and warm-up count.
+
+CALIBRATED FILES
+  outputs/real_ckks/representative_ckks_estimates.*
+  outputs/real_ckks/representative_ckks_table.tex
+
+These files contain model-based estimates. They are a different type of evidence
+from measured hardware results and should be labelled accordingly.

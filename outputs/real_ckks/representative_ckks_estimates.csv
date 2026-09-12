@@ -1,0 +1,9 @@
+metric,KGC,SK-HE,units,evidence
+server_latency,12.43,53.62,s,calibrated estimate
+input_encryption,0.99,0.33,s,calibrated estimate
+upload_payload,229.5,76.5,MiB,raw-RNS payload proxy
+peak_ciphertext_working_set,363,422,MiB,"modeled, keys/runtime excluded"
+graph_HE_matvecs,0,68,count,exact structural count
+absolute_server_time_saved,41.19,,s,derived estimate
+TRG,76.8,,%,derived estimate
+server_speedup,4.31,,x,derived estimate

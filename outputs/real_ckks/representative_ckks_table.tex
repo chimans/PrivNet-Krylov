@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Calibrated representative CPU model for the matched Karate KGC/SK-HE pair. Values are \emph{estimates, not measured TenSEAL runtimes}, anchored to the public TenSEAL c4.2xlarge microbenchmarks of Benaissa et al. and rescaled to the reference $N=16384$, 400-bit chain. Payload is a raw-RNS ciphertext-volume proxy; peak memory excludes evaluation keys and runtime overhead.}
+\label{tab:modeled-ckks}
+\small
+\begin{tabular}{lrr}
+\toprule
+Metric & KGC & SK-HE \\
+\midrule
+Server wall-clock estimate (s) & 12.43 & 53.62 \\
+Input encryption estimate (s) & 0.99 & 0.33 \\
+Input ciphertexts & 102 & 34 \\
+Upload payload proxy (MiB) & 229.5 & 76.5 \\
+Peak ciphertext working set (MiB) & 363 & 422 \\
+Server graph HE matvecs & 0 & 68 \\
+\midrule
+Absolute server time saved (s) & \multicolumn{2}{c}{41.19} \\
+Topology Relocation Gain (TRG) & \multicolumn{2}{c}{76.8\%} \\
+Matched server speedup & \multicolumn{2}{c}{4.31$\times$} \\
+\bottomrule
+\end{tabular}
+\end{table}

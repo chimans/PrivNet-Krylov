@@ -1,0 +1,3 @@
+artifact,nodes,feature_dim,krylov_degree,kgc_input_ciphertexts,kgc_graph_ct_pt_multiplies,kgc_graph_ct_ct_multiplies,kgc_graph_rotations,skhe_input_ciphertexts,skhe_graph_ct_pt_multiplies,skhe_graph_rotations,fsethe_input_feature_ciphertexts,fsethe_input_topology_ciphertexts,fsethe_graph_ct_ct_multiplies,fsethe_graph_rotations,fsethe_graph_additions
+Karate,34,34,2,102,0,0,0,34,2312,2244,34,34,2312,2244,2244
+Digits-10NN,1797,32,2,96,0,0,0,32,115008,114944,32,1797,115008,114944,114944

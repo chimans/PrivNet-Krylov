@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Public-graph validation on Zachary's Karate Club over 20 stratified splits. Values are mean $\pm$ sample standard deviation.}
+\label{tab:karate-public}
+\begin{tabular}{lc}
+\toprule
+Quantity & Result \\
+\midrule
+Nodes / edges & 34 / 78 \\
+Classes / input features & 2 / 34 \\
+Krylov degree / polynomial degree & 2 / 5 \\
+ReLU test accuracy & 85.50 $\pm$ 12.76\% \\
+Polynomial test accuracy before fine-tuning & 84.50 $\pm$ 12.76\% \\
+Polynomial test accuracy after fine-tuning & 85.00 $\pm$ 12.77\% \\
+Polynomial/ReLU prediction agreement & 97.06 $\pm$ 3.57\% \\
+Nonzero cyclic diagonals of $S$ & 34 \\
+\bottomrule
+\end{tabular}
+\end{table}

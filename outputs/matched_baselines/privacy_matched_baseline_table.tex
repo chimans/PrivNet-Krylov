@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\caption{Matched server-side graph-propagation accounting. FS-ETHE is a fixed-shape encrypted-topology reference: all $n$ cyclic diagonals are encrypted and evaluated, including padded zero diagonals, so sparsity is not disclosed through message shape or branch count. Counts exclude the post-bank head shared by all paths.}
+\label{tab:privacy-matched-baseline}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Artifact & KGC graph ct-ct mult. & SK-HE graph ct-pt mult. & FS-ETHE graph ct-ct mult. & FS-ETHE rotations \\
+\midrule
+Karate & 0 & 2{,}312 & 2{,}312 & 2{,}244 \\
+Digits-10NN & 0 & 115{,}008 & 115{,}008 & 114{,}944 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}

@@ -1,0 +1,50 @@
+{
+  "dataset": "scikit-learn Digits 10-NN graph",
+  "provenance": "load_digits() public data; graph built deterministically from pixel-space nearest neighbours",
+  "num_seeds": 5,
+  "config": {
+    "neighbors": 10,
+    "feature_dim": 32,
+    "projection_seed": 20260905,
+    "krylov_degree": 2,
+    "hidden_dim": 28,
+    "activation_degree": 5,
+    "train_per_class": 50,
+    "val_per_class": 20,
+    "epochs_relu": 450,
+    "patience_relu": 70,
+    "epochs_poly": 160,
+    "patience_poly": 45,
+    "lr_relu": 0.02,
+    "lr_poly": 0.004,
+    "weight_decay": 0.0005,
+    "interval_padding": 1.08,
+    "interval_penalty": 0.005,
+    "poly_grid_size": 12001
+  },
+  "nodes": 1797,
+  "undirected_edges": 12339,
+  "feature_dim": 32,
+  "train_validation_test": [
+    500,
+    200,
+    1097
+  ],
+  "relu_test_accuracy_after_finetune": {
+    "mean": 0.9735642552375794,
+    "sample_sd": 0.00837956671653788
+  },
+  "poly_test_accuracy_after_finetune": {
+    "mean": 0.9746581435203552,
+    "sample_sd": 0.0037252172356593313
+  },
+  "poly_relu_prediction_agreement_all_nodes": {
+    "mean": 0.9902058959007263,
+    "sample_sd": 0.00519947919646214
+  },
+  "test_preactivation_interval_coverage": {
+    "mean": 0.9999934911727906,
+    "sample_sd": 1.4554180094181121e-05
+  },
+  "evidence_note": "The graph is derived from public observations rather than supplied as a canonical graph benchmark. It is used to add a substantially larger, fully executable public-data graph while preserving an offline reproduction path."
+}
