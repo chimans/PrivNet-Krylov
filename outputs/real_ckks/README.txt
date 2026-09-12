@@ -26,7 +26,9 @@ There are two different types of CKKS results in this directory.
      pip install -r requirements-ckks.txt
      python code/real_ckks_public_benchmark.py \
        --artifact outputs/public_graph/karate_seed7_ckks_artifact.npz \
-       --out outputs/real_ckks --repeats 5 --warmup 1
+       --out outputs/real_ckks \
+       --security-estimator-json /path/to/security_estimator.json \
+       --repeats 5 --warmup 1
 
    A real run writes files beginning with `measured_`, including:
      measured_ckks_results.json
@@ -34,4 +36,5 @@ There are two different types of CKKS results in this directory.
      measured_ckks_table.tex
 
 The representative files must remain labelled as estimates. Measured files should
-only be kept when they were produced by an actual TenSEAL run on documented hardware.
+only be kept when they were produced by an actual TenSEAL run on documented hardware
+and include a real security-estimator result for the exact CKKS parameter set.

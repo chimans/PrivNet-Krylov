@@ -384,7 +384,16 @@ def main() -> None:
     ap.add_argument("--label", default="Zachary Karate Club")
     ap.add_argument("--repeats", type=int, default=5)
     ap.add_argument("--warmup", type=int, default=1)
+    ap.add_argument("--security-estimator-json", type=Path)
     args = ap.parse_args()
+    if args.security_estimator_json is None:
+        raise SystemExit(
+            "--security-estimator-json is required for MEASURED_REAL_CKKS output; "
+            "provide a real security estimator JSON result for the CKKS parameter set"
+        )
+    if not args.security_estimator_json.is_file():
+        raise SystemExit(f"security estimator JSON not found: {args.security_estimator_json}")
+    security_estimator = json.loads(args.security_estimator_json.read_text())
     if args.repeats < 1 or args.warmup < 0:
         raise SystemExit("--repeats must be >= 1 and --warmup must be >= 0")
     if not args.artifact.is_file():
@@ -443,6 +452,7 @@ def main() -> None:
         "artifact": str(args.artifact.resolve()),
         "hardware": _hardware(),
         "ckks_parameters": asdict(params),
+        "security_estimator": security_estimator,
         "context_and_key_setup_ms": context_setup_ms,
         "client_plaintext_compile_ms": compile_ms,
         "repeats": args.repeats,

@@ -65,6 +65,7 @@ python code/real_ckks_public_benchmark.py \
   --artifact outputs/public_graph/karate_seed7_ckks_artifact.npz \
   --label "Zachary Karate Club" \
   --out outputs/real_ckks/measured \
+  --security-estimator-json /path/to/security_estimator.json \
   --repeats 5 --warmup 1
 ```
 
@@ -74,7 +75,9 @@ A successful run produces:
 - `measured_ckks_results.csv`
 - `measured_ckks_table.tex`
 
-The recorded metadata include the CKKS parameters, CPU and RAM information, Python/NumPy/TenSEAL versions, warm-up and repetition counts, key and context setup, client compilation, encryption/server/decryption times, serialized ciphertext size, numerical error, accuracy, prediction agreement, and process-memory change when `psutil` is available.
+A measured run requires `--security-estimator-json` pointing to a real security-estimator result for the exact CKKS parameter set. The estimator payload is preserved in `measured_ckks_results.json`; the benchmark does not infer or fabricate a security level from the parameter tuple alone.
+
+The recorded metadata include the CKKS parameters, security-estimator output, CPU and RAM information, Python/NumPy/TenSEAL versions, warm-up and repetition counts, key and context setup, client compilation, encryption/server/decryption times, serialized ciphertext size, numerical error, accuracy, prediction agreement, and process-memory change when `psutil` is available.
 
 The same runner can be used with the 1,797-node Digits artifact:
 
@@ -83,6 +86,7 @@ python code/real_ckks_public_benchmark.py \
   --artifact outputs/larger_public_graph/digits_knn_seed7_ckks_artifact.npz \
   --label "Digits 10-NN graph" \
   --out outputs/real_ckks/measured_digits \
+  --security-estimator-json /path/to/security_estimator.json \
   --repeats 3 --warmup 1
 ```
 

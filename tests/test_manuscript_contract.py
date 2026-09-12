@@ -31,3 +31,15 @@ def test_real_ckks_defaults_match_manuscript():
 def test_real_ckks_reference_chain_is_400_bits():
     params = _get_ckks_defaults()
     assert sum(params["coeff_mod_bit_sizes"]) == 400
+
+def test_real_ckks_benchmark_records_security_estimator_metadata():
+    src = Path("code/real_ckks_public_benchmark.py").read_text()
+
+    assert "--security-estimator-json" in src
+    assert '"security_estimator"' in src
+
+def test_real_ckks_measured_output_requires_security_estimator():
+    src = Path("code/real_ckks_public_benchmark.py").read_text()
+
+    assert 'if args.security_estimator_json is None:' in src
+    assert 'security estimator' in src.lower()

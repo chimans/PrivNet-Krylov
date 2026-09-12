@@ -21,3 +21,11 @@ def test_fixed_shape_counts_karate_reference():
     assert c.kgc_graph_ct_ct_multiplies == 0
     assert c.fsethe_graph_ct_ct_multiplies == 2312
     assert c.fsethe_input_topology_ciphertexts == 34
+
+def test_fixed_shape_counts_digits_reference():
+    c = fixed_shape_counts(nodes=1797, feature_dim=32, krylov_degree=2)
+
+    assert c.kgc_graph_ct_ct_multiplies == 0
+    assert c.fsethe_graph_ct_ct_multiplies == 115008
+    assert c.fsethe_graph_rotations == 114944
+    assert c.fsethe_input_topology_ciphertexts == 1797

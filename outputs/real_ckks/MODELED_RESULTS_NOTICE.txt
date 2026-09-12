@@ -41,6 +41,11 @@ Server times should be treated with a ±25% scenario band; encryption with ±35%
 working-set memory with ±30%. The payload number is a raw-RNS representation proxy,
 not a TenSEAL serialization measurement. Evaluation-key memory is excluded.
 
-For publication-quality *measured* results, install requirements-ckks.txt and run:
-  python code/real_ckks_public_benchmark.py --repeats 5
+For publication-quality *measured* results, install requirements-ckks.txt and run
+the benchmark with a real security-estimator JSON result for the exact CKKS parameter set:
+
+  python code/real_ckks_public_benchmark.py \
+    --security-estimator-json /path/to/security_estimator.json \
+    --repeats 5
+
 Then replace/model-compare these estimates with the generated measured CSV/JSON/TeX.
