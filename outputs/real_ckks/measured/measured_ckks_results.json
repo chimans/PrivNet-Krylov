@@ -1,0 +1,87 @@
+{
+  "evidence_status": "MEASURED_REAL_CKKS",
+  "benchmark": "PrivNet-Krylov matched TenSEAL CKKS relocation benchmark",
+  "dataset": {
+    "name": "Zachary Karate Club",
+    "nodes": 34,
+    "edges": 78,
+    "feature_dim": 34
+  },
+  "artifact": "/Users/aldo_valletti/PrivNet-Krylov/outputs/public_graph/karate_seed7_ckks_artifact.npz",
+  "hardware": {
+    "platform": "macOS-14.6-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "cpu_model": "arm",
+    "logical_cpu_count": 8,
+    "physical_cpu_count": 8,
+    "ram_bytes": 8589934592,
+    "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "numpy": "2.5.3",
+    "tenseal": "0.3.16",
+    "omp_num_threads": null,
+    "mkl_num_threads": null
+  },
+  "ckks_parameters": {
+    "poly_modulus_degree": 32768,
+    "coeff_mod_bit_sizes": [
+      60,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      60
+    ],
+    "global_scale_bits": 40
+  },
+  "context_and_key_setup_ms": 4015.711208343506,
+  "client_plaintext_compile_ms": 3.504667282104492,
+  "repeats": 1,
+  "warmup": 0,
+  "paths": {
+    "KGC": {
+      "encrypt_ms_median": 2108.300832748413,
+      "server_ms_median": 9690.614208221436,
+      "decrypt_ms_median": 27.911375045776367,
+      "upload_bytes_median": 416831434,
+      "output_bytes_median": 4215160,
+      "rss_delta_bytes_median": 0,
+      "quality": {
+        "max_abs_logit_error": 2.062405732550232e-05,
+        "mean_abs_logit_error": 7.587199841720913e-06,
+        "test_accuracy": 0.9,
+        "prediction_agreement_with_plaintext": 1.0
+      },
+      "input_ciphertext_vectors": 102,
+      "graph_he_matvec_calls": 0
+    },
+    "SK-HE": {
+      "encrypt_ms_median": 697.2711238861084,
+      "server_ms_median": 56055.13904094696,
+      "decrypt_ms_median": 9.637290954589844,
+      "upload_bytes_median": 138939920,
+      "output_bytes_median": 1839464,
+      "rss_delta_bytes_median": 414679040,
+      "quality": {
+        "max_abs_logit_error": 4.1160640935400394e-05,
+        "mean_abs_logit_error": 1.5480303392256587e-05,
+        "test_accuracy": 0.9,
+        "prediction_agreement_with_plaintext": 1.0
+      },
+      "input_ciphertext_vectors": 34,
+      "graph_he_matvec_calls": 68
+    }
+  },
+  "comparison": {
+    "server_speedup": 5.784477416652316,
+    "topology_relocation_gain": 0.8271235363247842,
+    "upload_ratio_kgc_to_skhe": 3.000084021928327,
+    "amortized_break_even_queries": 1,
+    "cyclic_diagonal_count": 34
+  },
+  "scope_note": "SK-HE uses plaintext topology and is a matched computation-placement ablation, not a privacy-equivalent competitor. Privacy-equivalent graph recurrence is handled separately by the fixed-shape encrypted-topology operation-count baseline."
+}

@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Measured real-CKKS relocation benchmark on Zachary Karate Club. Values are medians over the declared repetitions on the recorded hardware.}
+\label{tab:real-ckks}
+\begin{tabular}{lrr}
+\toprule
+Quantity & KGC & SK-HE baseline \\
+\midrule
+Input ciphertext vectors & 102 & 34 \\
+Graph-dependent HE matvec calls & 0 & 68 \\
+Encryption time (ms) & 2108.30 & 697.27 \\
+Server evaluation time (ms) & 9690.61 & 56055.14 \\
+Decryption time (ms) & 27.91 & 9.64 \\
+Upload (MiB) & 397.521 & 132.503 \\
+Max. logit error & 2.062e-05 & 4.116e-05 \\
+Test accuracy (\%) & 90.00 & 90.00 \\
+\midrule
+Server speedup $T_{\rm SKHE}/T_{\rm KGC}$ & \multicolumn{2}{c}{5.784$\times$} \\
+Topology Relocation Gain (TRG) & \multicolumn{2}{c}{82.71\%} \\
+\bottomrule
+\end{tabular}
+\end{table}

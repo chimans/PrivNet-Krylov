@@ -1,30 +1,29 @@
-MODELED CKKS RESULTS - NOT HARDWARE MEASUREMENTS
+MODELED CKKS RESULTS -- NOT MEASURED HARDWARE OUTPUT
 
 Purpose
 -------
-These files provide representative CPU estimates for the case where a TenSEAL
-runtime was not available during the build. They are calculated from published
-CKKS microbenchmarks and explicit scaling assumptions; they are not measurements
-from the hardware used to build this repository.
+These files address the absence of a directly runnable TenSEAL environment in the
+submission-build container without fabricating empirical observations. They provide
+transparent, representative CPU estimates and a reproducible calculation script.
 
-Calibration source
+Calibration anchor
 ------------------
-Benaissa, Retiat, Cebere, and Belfedhal (2021), "TenSEAL: A Library for Encrypted
-Tensor Operations Using Homomorphic Encryption", arXiv:2104.03152 / ICLR 2021
-DPML. Their CKKSVector benchmarks were run on an AWS EC2 c4.2xlarge system with
-8 vCPUs, an Intel Xeon E5-2666 v3 at 2.9 GHz, 15 GiB RAM, Ubuntu Server 20.04,
-Python 3.8, N=8192 and a 200-bit coefficient modulus. For shape [256], the
-reported mean timings include add=0.08 ms, multiply=4.45 ms, add-plain=0.80 ms,
-multiply-plain=1.75 ms, dot=20.15 ms, and quadratic polyval=10.55 ms.
+Benaissa, Retiat, Cebere, and Belfedhal (2021), TenSEAL: A Library for Encrypted
+Tensor Operations Using Homomorphic Encryption, arXiv:2104.03152 / ICLR 2021 DPML.
+Their complete CKKSVector benchmarks were run on AWS EC2 c4.2xlarge: 8 vCPU Intel
+Xeon E5-2666 v3 at 2.9 GHz, 15 GiB RAM, Ubuntu Server 20.04, Python 3.8, with
+N=8192 and a 200-bit coefficient modulus. For shape [256], reported mean timings
+include add=0.08 ms, multiply=4.45 ms, add-plain=0.80 ms, multiply-plain=1.75 ms,
+dot=20.15 ms, and quadratic polyval=10.55 ms.
 
 Target context
 --------------
 N=16384; coeff_mod_bit_sizes=(60,40,40,40,40,40,40,40,60), total 400 bits;
-global scale=2^40; slot capacity=8192. These parameters belong to the benchmark
-model and are not, by themselves, a security proof.
+global scale=2^40; slot capacity=8192. These are the reference benchmark-script
+parameters, not a standalone security proof.
 
-Representative Karate estimates
---------------------------------
+Headline representative estimates (Karate artifact)
+----------------------------------------------------
 KGC server estimate: 12.43 s
 SK-HE server estimate: 53.62 s
 Absolute server time saving: 41.19 s
@@ -33,20 +32,15 @@ Matched server speedup: 4.31x
 KGC / SK-HE upload payload proxy: 229.5 / 76.5 MiB
 KGC / SK-HE peak ciphertext working set: 363 / 422 MiB
 
-Interpretation
---------------
-The latency model rescales operations dominated by NTT and key switching using
-N log2(N) and the number of RNS limbs, and derives a rotation anchor from the
-published TenSEAL dot benchmark. The degree-5 polynomial is modeled as 2.2 times
-the target-context quadratic polyval cost. This is an estimate, not a TenSEAL
-measurement.
+Interpretation and uncertainty
+------------------------------
+The latency model rescales NTT/key-switch dominated operations by N log2(N) and
+RNS-limb count and infers a rotation anchor from the TenSEAL dot benchmark. A
+degree-5 polynomial is modeled at 2.2x the target-context quadratic polyval cost.
+Server times should be treated with a ±25% scenario band; encryption with ±35%;
+working-set memory with ±30%. The payload number is a raw-RNS representation proxy,
+not a TenSEAL serialization measurement. Evaluation-key memory is excluded.
 
-The suggested scenario ranges are ±25% for server time, ±35% for encryption,
-and ±30% for working-set memory. The payload value is a raw-RNS representation
-proxy and is not a TenSEAL serialization measurement. Evaluation-key memory is
-not included.
-
-For direct measurements, install requirements-ckks.txt and run:
+For publication-quality *measured* results, install requirements-ckks.txt and run:
   python code/real_ckks_public_benchmark.py --repeats 5
-
-Keep the resulting measured files separate from these calibrated estimates.
+Then replace/model-compare these estimates with the generated measured CSV/JSON/TeX.
